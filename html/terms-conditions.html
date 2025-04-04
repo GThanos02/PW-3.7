@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Termini e Condizioni - Boeing</title>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+       integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+       crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+   <!--  Percorso di AOS per poter usare le animazioni -->
+   <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+   <link rel="stylesheet" href="/css/styles.css">
+   <style>
+
+       /* Stili specifici per la pagina*/
+       .terms-container {
+           background-color: white;
+           border-radius: 8px;
+           box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+           padding: 2rem;
+           margin: 2rem 0;
+       }
+
+       .terms-section {
+           margin-bottom: 2rem;
+           padding-bottom: 1.5rem;
+           border-bottom: 1px solid #eee;
+       }
+
+       .terms-section:last-child {
+           border-bottom: none;
+           margin-bottom: 0;
+           padding-bottom: 0;
+       }
+
+       .terms-section h3 {
+           color: #0039A6;
+           margin-bottom: 1rem;
+           font-size: 1.3rem;
+       }
+
+       .terms-section ul, .terms-section ol {
+           padding-left: 1.5rem;
+           margin-bottom: 1rem;
+       }
+
+       .terms-section li {
+           margin-bottom: 0.5rem;
+       }
+
+       .terms-header {
+           text-align: center;
+           margin-bottom: 2rem;
+       }
+
+       .terms-header h2 {
+           color: #0039A6;
+           margin-bottom: 0.5rem;
+       }
+
+       .terms-header p {
+           color: #666;
+           font-style: italic;
+       }
+
+       .contact-email {
+           color: #0039A6;
+           text-decoration: none;
+           font-weight: 600;
+       }
+
+       .contact-email:hover {
+           text-decoration: underline;
+       }
+
+       .back-link {
+           display: inline-flex;
+           align-items: center;
+           color: #0039A6;
+           text-decoration: none;
+           font-weight: 600;
+           margin-bottom: 1rem;
+           transition: color 0.3s ease;
+       }
+
+       .back-link:hover {
+           color: #003366;
+       }
+
+       .back-link i {
+           margin-right: 0.5rem;
+       }
+
+       .important-note {
+           background-color: #f8f9fa;
+           border-left: 4px solid #0039A6;
+           padding: 1rem;
+           margin: 1rem 0;
+           font-style: italic;
+       }
+
+       .footer-links a.active {
+           color: #0039A6;
+           font-weight: 600;
+       }
+   </style>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div data-aos="fade-right" data-aos-duration="1000">
+                    <a href="/html/index.html">
+                        <img src="/img/logo.png" alt="Boeing Logo" id="logo">
+                    </a>
+                </div>
+                
+                <!-- Commentato il codice, per una futura implementazione, della barra di navigazione, barra di ricerca, selettore lingua e toggle tema
+                <div id="navBar" data-aos="fade-left" data-aos-duration="1000">
+                    <nav>
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="reports.html">Reports</a></li>
+                            <li><a href="about.html">Chi Siamo</a></li>
+                            <li><a href="contact.html">Contatti</a></li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <div id="searchBar" data-aos="fade-left" data-aos-duration="1000">
+                    <input type="text" placeholder="Cerca...">
+                    <button type="submit"><i class="fas fa-search"></i></button>
+                </div>
+
+                <div id="languageSelector" data-aos="fade-left" data-aos-duration="1000">
+                    <select id="languageSelect">
+                        <option value="it">IT</option>
+                        <option value="en">EN</option>
+                    </select>
+                </div>
+                <div id="themeToggle" data-aos="fade-left" data-aos-duration="1000">
+                    <button id="toggleButton"><i class="fas fa-adjust"></i></button>
+                </div>-->
+
+                <div id="userSection" data-aos="fade-left" data-aos-duration="1000">
+                    <div id="authButtons">
+                        <button id="loginButton" class="secondary-btn"><i class="fas fa-sign-in-alt fa-lg"></i> Login</button>
+                        <button id="registerButton" class="primary-btn"><i class="fas fa-user-plus fa-lg"></i> Registarti</button>
+                    </div>
+
+                    <div id="userInfo" class="user-info" style="display: none;">
+                        <span id="welcomeUser">Benvenuto, </span> 
+                        <button id="logoutButton" class="logout-btn">Logout</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Modal di login -->
+   <div id="loginModal" class="modal" >
+        <div class="modal-content" style="background-image: url(/img/climate-environment-hero.jpeg);"> <!-- Immagine di sfondo al modal di login -->
+            <span class="close" data-modal="loginModal" >&times;</span>
+
+            <h2>Login</h2>
+            <p>Inserisci le tue credenziali per aver accesso ai reports riservati.</p>
+            <form id="loginForm" >
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" name="email"  placeholder="Inserisci la tua email" required
+                        pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+                        title="Inserisci una mail valida">
+                </div>
+
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" name="password" title="Inserisci la password" placeholder="••••••••" required>
+                </div>
+
+                <button type="submit" class="primary-btn">Login</button>
+                <p class="form-footer">Non hai un account? <a href="#" id="showRegisterLink">Registrati</a></p>
+            </form>
+
+            <div id="loginError" class="error-message"></div>
+        </div>
+    </div>
+
+    <!-- Modal di registrazione -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content" style="background-image: url(/img/climate-environment-hero-2.jpeg); background-size: cover;"> <!-- Immagine di sfondo al modal di registrazione -->
+            <span class="close" data-modal="registerModal">&times;</span>
+            <h2>Registrazione</h2>
+            <p style="color: black;">Crea un account per accedere ai reports riservati.</p>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="registerName">Nome completo</label>
+                    <input type="text" id="registerName" name="name" placeholder="Inserisci il tuo nome" required
+                        pattern="[A-Za-z\s]+" title="Il nome deve contenere solo lettere e spazi">
+                </div>
+                <div class="form-group">
+                    <label for="registerEmail">Email</label>
+                    <input type="email" id="registerEmail" name="email" placeholder="Inserisci la tua email" required
+                        pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+                        title="Inserisci una mail valida">
+                </div>
+
+                <!-- Modifica del form di registrazione per aggiungere l'indicatore di robustezza della password -->
+                <div class="form-group">
+                    <label for="registerPassword">Password</label>
+                    <input type="password" id="registerPassword" name="password" placeholder="••••••••" title="Inserisci la password" required minlength="8">
+                    <div class="password-strength" id="passwordStrength"></div>
+                    <div class="password-feedback" id="passwordFeedback">La password deve contenere almeno 8 caratteri.</div>
+                </div>
+                <div class="form-group">
+                    <label for="registerPasswordConfirm">Conferma password</label>
+                    <input type="password" id="registerPasswordConfirm" name="passwordConfirm" required>
+                </div>
+                <div class="form-group checkbox">
+                    <input type="checkbox" id="termsAccept" name="termsAccept" required>
+                    <label for="termsAccept">Accetto i <a href="terms-conditions.html" class="inline-link">Termini e Condizioni</a> e <a href="privacy-policy.html" class="inline-link">Privacy Policy</a></label>
+                </div>
+                <button type="submit" class="primary-btn">Registrati</button>
+                <p class="form-footer">Hai già un account? <a href="#" id="showLoginLink">Login</a></p>
+            </form>
+            <div id="registerError" class="error-message"></div>
+        </div>
+    </div>
+
+    <!--Sezione principale della pagina-->
+   <section>
+       <div class="container">
+           <a href="index.html" class="back-link" data-aos="fade-right">
+               <i class="fas fa-arrow-left"></i> Torna alla Home
+           </a>
+
+           <div class="terms-container" data-aos="fade-up" data-aos-duration="1000">
+               <div class="terms-header">
+                   <h2>Termini and Condizioni</h2>
+                   <p>Ultimo aggiornamento: Marzo 2025</p>
+               </div>
+
+               <div class="terms-section" data-aos="fade-up" data-aos-delay="100">
+                   <h3>1. Accettazione delle Condizioni</h3>
+                   <p>Utilizzando il sito web di Boeing e accedendo ai nostri servizi, l'utente accetta di essere vincolato da questi Termini e condizioni, dalla nostra Informativa sulla privacy e da tutte le leggi e i regolamenti applicabili. Se non accetti questi termini, ti preghiamo di non utilizzare il nostro sito.</p>
+               </div>
+
+               <div class="terms-section" data-aos="fade-up" data-aos-delay="200">
+                   <h3>2. Uso del Sito</h3>
+                   <p>L'utente accetta di utilizzare il sito esclusivamente per scopi legittimi e in un modo che non violi i diritti di terzi, limitare o inibire l'uso e la fruizione del sito da parte di altri utenti. È vietato:</p>
+                   <ul>
+                       <li>Utilizzare il sito in modo fraudolento o in connessione con un reato;</li>
+                       <li>Inviare, utilizzare o riutilizzare materiale illegale, offensivo, abusivo, diffamatorio o che violi la privacy di terzi;</li>
+                       <li>Trasmettere materiale pubblicitario o promozionale non richiesto;</li>
+                       <li>Tentativo di interferire con il corretto funzionamento del sito.</li>
+                   </ul>
+               </div>
+
+               <div class="terms-section" data-aos="fade-up" data-aos-delay="300">
+                   <h3>3. Registrazione e Account</h3>
+                   <p>Alcuni contenuti e servizi sul nostro sito sono accessibili solo agli utenti registrati. Al momento della registrazione, l'utente accetta di:</p>
+                   <ul>
+                       <li>Fornire informazioni veritiere, accurate, aggiornate e complete;</li>
+                       <li>Mantenere e aggiornare tempestivamente i dati di registrazione;</li>
+                       <li>Mantenere la sicurezza del tuo account e della tua password;</li>
+                       <li>Accettare la responsabilità per tutte le attività che si verificano con il tuo account.</li>
+                   </ul>
+                   <p>Boeing si riserva il diritto di disattivare qualsiasi account utente in qualsiasi momento se ritiene che l'utente non abbia rispettato i presenti Termini e condizioni.</p>
+               </div>
+
+               <div class="terms-section" data-aos="fade-up" data-aos-delay="400">
+                   <h3>4. Proprietà Intellettuale</h3>
+                   <p>Tutti i contenuti presenti sul sito, inclusi testo, grafica, loghi, icone, immagini, clip audio, download digitali, raccolte di dati e software, sono di proprietà di Boeing o dei suoi fornitori di contenuti ed è protetto dalle leggi sul copyright e sulla proprietà intellettuale.</p>
+                   <p>È possibile visualizzare, scaricare e stampare i contenuti dal sito esclusivamente per uso personale e non commerciale, a condizione che:</p>
+                   <ul>
+                       <li>Non modificare i documenti o le immagini correlate;</li>
+                       <li>Non rimuovere i diritti d'autore o altri avvisi di proprietà;</li>
+                       <li>Il contenuto non è utilizzato a fini commerciali.</li>
+                   </ul>
+               </div>
+
+               <div class="terms-section" data-aos="fade-up" data-aos-delay="500">
+                   <h3>5. Download dei Reports</h3>
+                   <p>Le relazioni sulla sostenibilità disponibili sul nostro sito sono fornite a scopo informativo. Scaricando questi documenti, accetti di: </p>
+                   <ul>
+                       <li>Utilizzare i rapporti esclusivamente per scopi personali, educativi o professionali <strong>non</strong> commerciali;</li>
+                       <li>Non modificare, riprodurre, distribuire o vendere il contenuto delle relazioni senza autorizzazione scritta;</li>
+                       <li>Citare Boeing come fonte quando si utilizzano le informazioni dei rapporti in altri contesti.</li>
+                   </ul>
+                   <p>Alcuni report sono accessibili solo agli utenti registrati. L'accesso non autorizzato a questi contenuti è severamente vietato.</p>
+               </div>
+
+               <div class="terms-section" data-aos="fade-up" data-aos-delay="600">
+                   <h3>6. Limitazioni di Responsabilità</h3>
+                   <p>Boeing si impegna a mantenere il sito aggiornato e funzionante, ma non garantisce che:</p>
+                   <ul>
+                       <li>Il sito sarà sempre disponibile o privo di interruzioni;</li>
+                       <li>Gli errori saranno corretti;</li>
+                       <li>Il sito o il server che lo rende disponibile sono privi di virus o bug;</li>
+                       <li>Le funzioni del sito saranno sempre pienamente operative.</li>
+                   </ul>
+                   <p>In nessun caso Boeing potrà essere ritenuta responsabile per qualsiasi perdita o danno, inclusi, senza limitazioni, perdite o danni indiretti o consequenziali, o per qualsiasi perdita o danno derivante dalla perdita di dati o profitti derivanti dall'uso di questo sito web.</p>
+               </div>
+
+               <div class="terms-section" data-aos="fade-up" data-aos-delay="700">
+                   <h3>7. Link di siti da terze parti</h3>
+                   <p>Il nostro sito può contenere link a siti web di terze parti. Questi link sono forniti esclusivamente per la comodità dell'utente. Boeing non ha alcun controllo sul contenuto di questi siti e non si assume alcuna responsabilità per:</p>
+                   <ul>
+                       <li>Il contenuto di qualsiasi sito collegato;</li>
+                       <li>Qualsiasi perdita o danno che possa derivare dall'uso di tali contenuti;</li>
+                       <li>Le politiche sulla privacy di tali siti.</li>
+                   </ul>
+               </div>
+
+               <div class="terms-section" data-aos="fade-up" data-aos-delay="800">
+                   <h3>8. Modifiche alle condizioni</h3>
+                   <p>Boeing si riserva il diritto di modificare i presenti Termini e condizioni in qualsiasi momento. Le modifiche entreranno in vigore immediatamente dopo la pubblicazione dei termini aggiornati sul sito. L'uso continuato del sito dopo tali modifiche costituisce accettazione delle nuove condizioni.</p>
+                   <p class="important-note">Si consiglia di controllare questa pagina regolarmente per essere informato di eventuali modifiche.</p>
+               </div>
+
+               <div class="terms-section" data-aos="fade-up" data-aos-delay="900">
+                   <h3>9. Legge Viggente</h3>
+                   <p>I presenti Termini e Condizioni sono disciplinati e interpretati in conformità con le leggi degli Stati Uniti. Qualsiasi controversia relativa a questi termini sarà soggetta alla giurisdizione esclusiva dei tribunali degli Stati Uniti d'America.</p>
+               </div>
+
+               <div class="terms-section" data-aos="fade-up" data-aos-delay="1000">
+                   <h3>10. Contatti</h3>
+                   <p>Per eventuali domande o chiarimenti in merito ai presenti termini e condizioni, contattaci all'indirizzo: <a href="mailto:legal@boeing.com" class="contact-email">legal@boeing.com</a></p>
+               </div>
+           </div>
+       </div>
+   </section>
+
+   <footer>
+       <div class="container">
+           <div class="footer-content" data-aos="fade-up">
+                <div class="footer-logo">
+                    <img src="/img/logo.png" alt="Logo Boeing" id="footer-logo">
+                </div>
+
+                <div class="footer-links">
+                   <a href="/html/privacy-policy.html">Privacy Policy</a>
+                   <a href="/html/terms-conditions.html" class="active">Termini and Condizioni</a>
+                </div>
+           </div>
+           <p class="copyright" data-aos="fade-up" data-aos-delay="200">&copy; <span id="anno"></span> Boeing. All rights reserved. Developed by Grillo Gaetano</p>
+       </div>
+   </footer>
+
+   <!-- Script AOS -->
+   <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+   <script>
+       document.addEventListener('DOMContentLoaded', function() {
+           // Inizializza AOS
+           AOS.init({
+               duration: 800,
+               easing: 'ease',
+               once: true,
+               offset: 100
+           });
+       });
+   </script>
+   
+   <!--Script per l'avanzamento automatico dell'anno-->
+   <script>
+        document.getElementById('anno').textContent = new Date().getFullYear();
+   </script>
+
+   <script src="/js/script.js"></script>
+</body>
+
+</html>
+

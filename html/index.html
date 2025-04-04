@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Boeing - Reports Sostenibilità</title>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+       integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+       crossorigin="anonymous" referrerpolicy="no-referrer" />
+   <!-- Percorso di AOS per poter usare le animazioni -->
+   <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+   <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+   <!-- Modal di login -->
+   <div id="loginModal" class="modal" >
+       <div class="modal-content" style="background-image: url(/img/climate-environment-hero.jpeg);"> <!-- Immagine di sfondo al modal di login -->
+           <span class="close" data-modal="loginModal" >&times;</span>
+           <h2>Login</h2>
+           <p>Inserisci le tue credenziali per aver accesso ai reports riservati.</p>
+           <form id="loginForm" >
+            
+               <div class="form-group">
+                   <label for="loginEmail">Email</label>
+                   <input type="email" id="loginEmail" name="email"  placeholder="Inserisci la tua email" required
+                        pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+                        title="Inserisci una mail valida">
+               </div>
+
+               <div class="form-group">
+                   <label for="loginPassword">Password</label>
+                   <input type="password" id="loginPassword" name="password" title="Inserisci la password" placeholder="••••••••" required>
+               </div>
+               <button type="submit" class="primary-btn">Login</button>
+               <p class="form-footer">Non hai un account? <a href="#" id="showRegisterLink">Registrati</a></p>
+
+           </form>
+           <div id="loginError" class="error-message"></div>
+       </div>
+   </div>
+
+   <!-- Modal di registrazione -->
+   <div id="registerModal" class="modal">
+       <div class="modal-content" style="background-image: url(/img/climate-environment-hero-2.jpeg); background-size: cover;"> <!-- Immagine di sfondo al modal di registrazione -->
+           <span class="close" data-modal="registerModal">&times;</span>
+           <h2>Registrazione</h2>
+           <p style="color: black;">Crea un account per accedere ai reports riservati.</p>
+           <form id="registerForm">
+               <div class="form-group">
+                   <label for="registerName">Nome completo</label>
+                   <input type="text" id="registerName" name="name" placeholder="Inserisci il tuo nome" required
+                       pattern="[A-Za-z\s]+" title="Il nome deve contenere solo lettere e spazi">
+               </div>
+
+               <div class="form-group">
+                   <label for="registerEmail">Email</label>
+                   <input type="email" id="registerEmail" name="email" placeholder="Inserisci la tua email" required
+                        pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+                        title="Inserisci una mail valida">
+               </div>
+
+               <!-- Modifica del form di registrazione per aggiungere l'indicatore di robustezza della password -->
+               <div class="form-group">
+                   <label for="registerPassword">Password</label>
+                   <input type="password" id="registerPassword" name="password" placeholder="••••••••" title="Inserisci la password" required minlength="8">
+                   <div class="password-strength" id="passwordStrength"></div>
+                   <div class="password-feedback" id="passwordFeedback">La password deve contenere almeno 8 caratteri.</div>
+               </div>
+
+               <div class="form-group">
+                   <label for="registerPasswordConfirm">Conferma password</label>
+                   <input type="password" id="registerPasswordConfirm" name="passwordConfirm" required>
+               </div>
+
+               <div class="form-group checkbox">
+                   <input type="checkbox" id="termsAccept" name="termsAccept" required>
+                   <label for="termsAccept">Accetto i <a href="terms-conditions.html" class="inline-link">Termini e Condizioni</a> e <a href="privacy-policy.html" class="inline-link">Privacy Policy</a></label>
+               </div>
+               <button type="submit" class="primary-btn">Registrati</button>
+               <p class="form-footer">Hai già un account? <a href="#" id="showLoginLink">Login</a></p>
+
+           </form>
+           <div id="registerError" class="error-message"></div>
+       </div>
+   </div>
+
+   <header style="background-image: url(/img/home_image-text-panel-1.jpeg); background-size: cover; background-position: center;">
+       <div class="container" >
+           <div class="header-content">
+               <div data-aos="fade-right" data-aos-duration="1000">
+                    <a href="/html/index.html">
+                        <img src="/img/logo.png" alt="Boeing Logo" id="logo">
+                    </a>
+               </div>
+
+               <div id="userSection" data-aos="fade-left" data-aos-duration="1000">
+                   <div id="authButtons">
+                       <button id="loginButton" class="secondary-btn"><i class="fas fa-sign-in-alt fa-lg"></i> Login</button>
+                       <button id="registerButton" class="primary-btn"><i class="fas fa-user-plus fa-lg"></i> Registarti</button>
+                   </div>
+
+                   <div id="userInfo" class="user-info" style="display: none;">
+                       <span id="welcomeUser">Benvenuto, </span> 
+                       <button id="logoutButton" class="logout-btn">Logout</button>
+                   </div>
+               </div>
+           </div>
+       </div>
+   </header>
+
+   <!-- Sezione di introduzione -->
+   <section id="intro" class="intro" >
+       <div class="container">
+           <div data-aos="fade-up" data-aos-duration="1200">
+               <h2>Il nostro impegno per la sostenibilità</h2>
+               <p style="color: black;">Boeing si impegna a creare un futuro più sostenibile attraverso pratiche commerciali responsabili e innovative. Le nostre relazioni annuali documentano il nostro impegno nei confronti dell'ambiente, della società e della governance.</p>
+           </div>
+           
+           <!-- Statistiche della compagnia Boeing -->
+           <div class="stats-container" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1200">
+               <div class="stat-item" data-aos="zoom-in" data-aos-delay="300">
+                   <i class="fas fa-plane fa-2x"></i>
+                   <br>
+                   <span class="stat-number" style="font-size: 3rem;">-14,5% </span>
+                   <br>
+                   <span class="stat-desc" style="color: black;">Riduzione di carburante usato dal 2000 al 2024</span>
+               </div>
+
+               <div class="stat-item" data-aos="zoom-in" data-aos-delay="500">
+                   <i class="fas fa-recycle fa-2x"></i>
+                   <br>
+                   <span class="stat-number" style="font-size: 3rem;">30%</span>
+                   <br>
+                   <span class="stat-desc" style="color: black;">Materiali riciclati nei nostri processi</span>
+               </div>
+               
+               <div class="stat-item" data-aos="zoom-in" data-aos-delay="700">
+                   <i class="fas fa-solar-panel fa-2x"></i>
+                   <br>
+                   <span class="stat-number"  style="font-size: 3rem;">39%</span>
+                   <br>
+                   <span class="stat-desc">Energia utilizzata nelle operazioni di Boeing proveniva da elettricità rinnovabile</span>
+               </div>
+           </div>
+       </div>
+   </section>
+
+   <!-- Sezione dei report più recenti -->
+   <section id="latest-reports" style="background-image: url(/img/safety-quality-hero-new-2.jpeg); background-size: cover; background-position: center;">
+       <div class="container">
+           <h2 data-aos="fade-up">Ultimi Report</h2>
+           <div class="reports-grid">
+               <div class="report-card protected" data-aos="flip-left" data-aos-delay="100" data-aos-duration="1000">
+                   <div class="protection-badge"><i class="fas fa-lock"></i> Accesso Riservato</div>
+                   <br>
+                   <h3>Report Sostenibilità 2024</h3>
+                   <p>Il nostro impegno per un futuro sostenibile nel settore aerospaziale.</p>
+                   <a href="./reports/Boeing_Sustainability_Report_2023.pdf" class="download-btn" data-protected="true"><i class="fas fa-download"></i> Download Report</a>
+               </div>
+               <div class="report-card protected" data-aos="flip-left" data-aos-delay="300" data-aos-duration="1000">
+                   <div class="protection-badge"><i class="fas fa-lock"></i> Accesso Riservato</div>
+                   <br>
+                   <h3>Report Sostenibilità 2023</h3>
+                   <p>Costruire la fiducia attraverso azione e trasparenza.</p>
+                   <a href="./reports/Boeing_Sustainability_Report_2022.pdf" class="download-btn" data-protected="true"><i class="fas fa-download"></i> Download Report</a>
+               </div>
+               <div class="report-card" data-aos="flip-left" data-aos-delay="500" data-aos-duration="1000">
+                   <br>
+                   <h3>Report Sostenibilità 2022</h3>
+                   <p>I nostri progressi verso gli obiettivi di sostenibilità nel settore aerospaziale.</p>
+                   <a href="./reports/Boeing_Sustainability_Report_2021.pdf" class="download-btn" data-protected="false"><i class="fas fa-download"></i> Download Report</a>
+               </div>
+           </div>
+       </div>
+   </section>
+
+   <!-- Sezione per gli obiettivi di sostenibilità -->
+   <section id="highlights" class="highlights">
+       <div class="container">
+           <h2 data-aos="fade-up">I Nostri Obiettivi</h2>
+           <div class="highlights-container">
+               <div class="highlight-item" data-aos="fade-right" data-aos-duration="1000">
+                   <div class="highlight-icon">
+                       <i class="fas fa-leaf fa-2x" style="margin-top: 20px; color:white; font-size: xxx-large;"></i>
+                   </div>
+                   
+                   <div class="highlight-content">
+                       <h3>Programma ecoDemonstrator</h3>
+                       <p>Dal 2012, Boeing ha testato circa 230 tecnologie attraverso questo programma, mirate a ridurre il consumo di carburante, le emissioni e il rumore. Nel 2022, il programma ha valutato 30 nuove tecnologie su un 777-200ER. </p>
+                   </div>
+               </div>
+
+               <div class="highlight-item" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
+                   <div class="highlight-icon">
+                       <i class="fas fa-users fa-2x" style="margin-top: 20px; color:white; font-size: xx-large;"></i>
+                   </div>
+                   <div class="highlight-content">
+                       <h3>Collaborazioni per testare i benefici del SAF</h3>
+                       <p>Nel 2023, Boeing ha collaborato con NASA e United Airlines per condurre test in volo, misurando l'effetto del SAF sulle scie di condensazione e sulle emissioni non legate al CO₂.</p>
+                   </div>
+               </div>
+
+               <div class="highlight-item" data-aos="fade-right" data-aos-duration="1000" data-aos-delay="400">
+                   <div class="highlight-icon">
+                       <i class="fas fa-lightbulb fa-2x" style="margin-top: 20px; color:white; font-size: xxx-large;"></i>
+                   </div>
+                   <div class="highlight-content">
+                       <h3>Strategia "Avoid first, then remove"</h3>
+                       <p>Boeing ha adottato un approccio che privilegia la prevenzione delle emissioni di CO₂ attraverso l'efficienza energetica e l'uso di energie rinnovabili, integrando successivamente compensazioni e rimozioni per le emissioni difficili da eliminare.</p>
+                   </div>
+               </div>
+           </div>
+       </div>
+   </section>
+
+   <!-- Sezione per i report archiviati -->
+   <section id="archive" class="archive" >
+       <div class="container">
+           <h2 data-aos="fade-up">Archivio dei Reports</h2>
+           <div class="archive-list" data-aos="fade-up" data-aos-delay="200">
+               <a href="./reports/Boeing_Sustainability_Report_2020.pdf" class="archive-item" data-protected="false" data-aos="fade-up" data-aos-delay="100">
+                   <i class="fas fa-file-pdf"></i>
+                   <span class="archive-year">2021</span>
+                   <span class="archive-title">Report Sostenibilità 2021</span>
+                   <span class="archive-size">7.0 MB</span>
+                   <i class="fas fa-download"></i>
+               </a>
+               <a href="./reports/Boeing_Sustainability_Report_2019.pdf" class="archive-item" data-protected="false" data-aos="fade-up" data-aos-delay="200">
+                   <i class="fas fa-file-pdf"></i>
+                   <span class="archive-year">2020</span>
+                   <span class="archive-title">Report Sostenibilità 2023</span>
+                   <span class="archive-size">7.0 MB</span>
+                   <i class="fas fa-download"></i>
+               </a>
+               <a href="./reports/Boeing_Sustainability_Report_2018.pdf" class="archive-item" data-protected="false" data-aos="fade-up" data-aos-delay="300">
+                   <i class="fas fa-file-pdf"></i>
+                   <span class="archive-year">2019</span>
+                   <span class="archive-title">Report Sostenibilità 2019</span>
+                   <span class="archive-size">9.4 MB</span>
+                   <i class="fas fa-download"></i>
+               </a>
+           </div>
+       </div>
+   </section>
+
+   <section id="contact" class="contact"  style="background-color: #0033A1;">
+       <div class="container">
+           <h2 data-aos="fade-up" style="color: aliceblue;">Contattaci</h2>
+           <p data-aos="fade-up" data-aos-delay="100" style="color: rgb(255, 255, 255);">Per maggiori informazioni sui nostri reports e/o iniziative, non esitate a contattarci.</p>
+           
+           <div class="contact-form" data-aos="zoom-in" data-aos-delay="300">
+   <form id="contactForm" action="https://api.web3forms.com/submit" method="POST">
+
+       <!-- Chiave di accesso Web3Forms -->
+       <input type="hidden" name="access_key" value="d450bfcf-e492-4875-825a-1bf2814c8213">
+       <input type="hidden" name="subject" value="Nuovo messaggio">
+       <input type="hidden" name="from_name" value="Boeing Form">
+       <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+       
+       <div class="form-row">
+            <div class="form-group">
+               <label for="contactName">Nome</label>
+               <input type="text" id="contactName" name="nome" placeholder="Mario" title="Inserisci il tuo nome"  required>
+            </div>
+
+            <div class="form-group">
+                <label for="contactSurname">Cognome</label>
+                <input type="text" id="contactSurname" name="cognome" placeholder="Rossi" title="Inserisci il tuo cognome" required>
+            </div>
+            
+            <div class="form-group">
+               <label for="contactEmail">Email</label>
+               <input type="email" id="contactEmail" name="email" placeholder="Inserisci la tua email" required
+               pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" title="Inserisci una mail valida"> <!-- Pattern per validare l'email -->
+            </div>
+       </div>
+
+       <div class="form-group">
+           <label for="contactSubject">Oggetto</label>
+           <input type="text" id="contactSubject" name="oggetto" placeholder="Informazioni" required>
+       </div>
+
+       <div class="form-group">
+           <label for="contactMessage">Messaggio</label>
+           <textarea id="contactMessage" name="messaggio" rows="5" placeholder="Scrivi il tuo messaggio" required></textarea>
+       </div>
+
+       <div class="form-group">
+           <button type="submit" class="primary-btn">
+               <span class="submit-text"><i class="fas fa-paper-plane"></i> Invia Messaggio</span>
+               <span class="loading-text" style="display: none;"><i class="fas fa-spinner fa-spin"></i> Invio...</span>
+           </button>
+       </div>
+       <div id="result" class="form-result"></div>
+   </form>
+</div>
+       </div>
+   </section>
+
+   <!-- Notifiche Toast -->
+   <div id="toast" class="toast"></div>
+
+   <footer>
+       <div class="container">
+           <div class="footer-content" data-aos="fade-up">
+               <div class="footer-logo">
+                   <img src="/img/logo.png" alt="Logo Boeing" id="footer-logo">
+               </div>
+               <div class="footer-links">
+                   <a href="/html/privacy-policy.html">Privacy Policy</a>
+                   <a href="/html/terms-conditions.html">Termini e Condizioni</a>
+               </div>
+           </div>
+           <p class="copyright" data-aos="fade-up" data-aos-delay="200">&copy; <span id="anno"></span> Boeing. All rights reserved. Developed by Grillo Gaetano</p>
+       </div>
+   </footer>
+
+   <!-- Script AOS -->
+   <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+   <script src="/js/script.js"></script>
+
+   <!--Script per l'avanzamento automatico dell'anno-->
+   <script>
+        document.getElementById('anno').textContent = new Date().getFullYear();
+    </script>
+
+</body>
+
+</html>
+

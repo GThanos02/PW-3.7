@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Boeing - Privacy Policy</title>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+       integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+       crossorigin="anonymous" referrerpolicy="no-referrer" />
+   <!-- Percorso di AOS per poter usare le animazioni -->
+   <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css"/>
+   <link rel="stylesheet" href="/css/styles.css">
+   <style>
+       /* Stili specifici per la pagina */
+       .privacy-container {
+           background-color: white;
+           border-radius: 8px;
+           box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+           padding: 2rem;
+           margin: 2rem 0;
+       }
+
+         /* Contenitore dei bottoni */
+            #userSection{
+            display: flex;
+            align-items: center;
+            gap: 10px; /* Distanza tra i bottoni */
+        }
+
+       .privacy-section {
+           margin-bottom: 2rem;
+           padding-bottom: 1.5rem;
+           border-bottom: 1px solid #eee;
+       }
+
+       .privacy-section:last-child {
+           border-bottom: none;
+           margin-bottom: 0;
+           padding-bottom: 0;
+       }
+
+       .privacy-section h3 {
+           color: #0039A6;
+           margin-bottom: 1rem;
+           font-size: 1.3rem;
+       }
+
+       .privacy-section ul {
+           padding-left: 1.5rem;
+           margin-bottom: 1rem;
+       }
+
+       .privacy-section li {
+           margin-bottom: 0.5rem;
+       }
+
+       .privacy-header {
+           text-align: center;
+           margin-bottom: 2rem;
+       }
+
+       .privacy-header h2 {
+           color: #0039A6;
+           margin-bottom: 0.5rem;
+       }
+
+       .privacy-header p {
+           color: #666;
+           font-style: italic;
+       }
+
+       .contact-email {
+           color: #0039A6;
+           text-decoration: none;
+           font-weight: 600;
+       }
+
+       .contact-email:hover {
+           text-decoration: underline;
+       }
+
+       .back-link {
+           display: inline-flex;
+           align-items: center;
+           color: #0039A6;
+           text-decoration: none;
+           font-weight: 600;
+           margin-bottom: 1rem;
+           transition: color 0.3s ease;
+       }
+
+       .back-link:hover {
+           color: #003366;
+       }
+
+       .back-link i {
+           margin-right: 0.5rem;
+       }
+       
+       .footer-links a.active {
+           color: #0039A6;
+           font-weight: 600;
+       }
+   </style>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div data-aos="fade-right" data-aos-duration="1000">
+                    <a href="/html/index.html">
+                        <img src="/img/logo.png" alt="Boeing Logo" id="logo">
+                    </a>
+                </div>
+                <div id="userSection" data-aos="fade-left" data-aos-duration="1000">
+                    <div id="authButtons">
+                        <button id="loginButton" class="secondary-btn"><i class="fas fa-sign-in-alt fa-lg"></i> Login</button>
+                        <button id="registerButton" class="primary-btn"><i class="fas fa-user-plus fa-lg"></i> Registarti</button>
+                    </div>
+                    <div id="userInfo" class="user-info" style="display: none;">
+                        <span id="welcomeUser">Benvenuto, </span> 
+                        <button id="logoutButton" class="logout-btn">Logout</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Modal di login -->
+   <div id="loginModal" class="modal">
+        <div class="modal-content" style="background-image: url(/img/climate-environment-hero.jpeg);">
+            <span class="close" data-modal="loginModal">&times;</span>
+            <h2>Login</h2>
+            <p>Inserisci le tue credenziali per aver accesso ai reports riservati.</p>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" name="email"  placeholder="Inserisci la tua email" required
+                        pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+                        title="Inserisci una mail valida">
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" name="password" title="Inserisci la password" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="primary-btn">Login</button>
+                <p class="form-footer">Non hai un account? <a href="#" id="showRegisterLink">Registrati</a></p>
+            </form>
+            <div id="loginError" class="error-message"></div>
+        </div>
+    </div>
+
+    <!-- Modal di registrazione -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content"  style="background-image: url(/img/climate-environment-hero-2.jpeg); background-size: cover;">
+            <span class="close" data-modal="registerModal">&times;</span>
+            <h2>Registrazione</h2>
+            <p>Crea un account per accedere ai reports riservati.</p>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="registerName">Nome completo</label>
+                    <input type="text" id="registerName" name="name" placeholder="Inserisci il tuo nome" required
+                        pattern="[A-Za-z\s]+" title="Il nome deve contenere solo lettere e spazi">
+                </div>
+                <div class="form-group">
+                    <label for="registerEmail">Email</label>
+                    <input type="email" id="registerEmail" name="email" placeholder="Inserisci la tua email" required
+                        pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+                        title="Inserisci una mail valida">
+                </div>
+
+                <!-- Modifica del form di registrazione per aggiungere l'indicatore di robustezza della password -->
+                <div class="form-group">
+                    <label for="registerPassword">Password</label>
+                    <input type="password" id="registerPassword" name="password" placeholder="••••••••" title="Inserisci la password" required minlength="8">
+                    <div class="password-strength" id="passwordStrength"></div>
+                    <div class="password-feedback" id="passwordFeedback">La password deve contenere almeno 8 caratteri.</div>
+                </div>
+                <div class="form-group">
+                    <label for="registerPasswordConfirm">Conferma password</label>
+                    <input type="password" id="registerPasswordConfirm" name="passwordConfirm" required>
+                </div>
+                <div class="form-group checkbox">
+                    <input type="checkbox" id="termsAccept" name="termsAccept" required>
+                    <label for="termsAccept">Accetto i <a href="terms-conditions.html" class="inline-link">Termini e Condizioni</a> e <a href="privacy-policy.html" class="inline-link">Privacy Policy</a></label>
+                </div>
+                <button type="submit" class="primary-btn">Registrati</button>
+                <p class="form-footer">Hai già un account? <a href="#" id="showLoginLink">Login</a></p>
+            </form>
+            <div id="registerError" class="error-message"></div>
+        </div>
+    </div>
+
+    <!--Sezione di contenuto principale-->
+   <section>
+       <div class="container">
+           <a href="index.html" class="back-link" data-aos="fade-right">
+               <i class="fas fa-arrow-left"></i> Torna alla Home
+           </a>
+
+           <div class="privacy-container" data-aos="fade-up" data-aos-duration="1000">
+               <div class="privacy-header">
+                   <h2>Privacy Policy</h2>
+                   <p>Ultimo aggiornamento: Marzo 2025</p>
+               </div>
+
+               <div class="privacy-section" data-aos="fade-up" data-aos-delay="100">
+                   <h3>1. Raccolta dei Dati</h3>
+                   <p>Boeing si impegna a proteggere la privacy dei propri utenti. I dati personali sono raccolti nel rispetto delle normative vigenti (GDPR e altre leggi applicabili) e utilizzati esclusivamente per finalità di miglioramento dei servizi e per comunicazioni istituzionali.</p>
+               </div>
+
+               <div class="privacy-section" data-aos="fade-up" data-aos-delay="200">
+                   <h3>2. Come usiamo i tuoi dati</h3>
+                   <p>I dati raccolti verranno usati per:</p>
+                   <ul>
+                       <li>Migliorare l'esperienza utente e personalizzare i contenuti.</li>
+                       <li>Fornire informazioni su prodotti, servizi e aggiornamenti aziendali.</li>
+                       <li>Condurre analisi statistiche e di mercato per ottimizzare le strategie aziendali.</li>
+                   </ul>
+               </div>
+
+               <div class="privacy-section" data-aos="fade-up" data-aos-delay="300">
+                   <h3>3. Sicurezza e Conservazione dei Dati</h3>
+                   <p>I dati sono archiviati su server sicuri, conformi agli standard internazionali e protetti da misure tecniche e organizzative volte a prevenire l'accesso non autorizzato, la perdita accidentale o la distruzione.</p>
+               </div>
+
+               <div class="privacy-section" data-aos="fade-up" data-aos-delay="400">
+                   <h3>4. Condivisione dei Dati</h3>
+                   <p>I dati personali non saranno ceduti a terzi, salvo nei casi espressamente previsti dalla legge o con l'esplicito consenso dell'utente.</p>
+               </div>
+
+               <div class="privacy-section" data-aos="fade-up" data-aos-delay="500">
+                   <h3>5. I Tuoi Diritti</h3>
+                   <p>Gli utenti hanno il diritto di:</p>
+                   <ul>
+                       <li>Accesso ai loro dati personali</li>
+                       <li>Richiedere rettifico o cancellazione dei dati</li>
+                       <li>Limitare o opporsi al trattamento dei dati.</li>
+                   </ul>
+                   <p>Per esercitare questi diritti, puoi contattarci all'indirizzo: <a href="mailto:privacy@boeing.com" class="contact-email">privacy@boeing.com</a></p>
+               </div>
+
+               <div class="privacy-section" data-aos="fade-up" data-aos-delay="600">
+                   <h3>6. Modifiche della privacy-policy</h3>
+                   <p>L'informativa sulla privacy può essere aggiornata periodicamente per riflettere i cambiamenti normativi o organizzativi. In questi casi, le modifiche saranno prontamente comunicate e rese disponibili sul nostro sito ufficiale.</p>
+               </div>
+
+               <div class="privacy-section" data-aos="fade-up" data-aos-delay="700">
+                   <p>Per ulteriori informazioni o domande sul trattamento dei dati, <a href="/html/index.html#contact"> contattateci</a></p>
+               </div>
+           </div>
+       </div>
+   </section>
+
+   <footer>
+       <div class="container">
+           <div class="footer-content" data-aos="fade-up">
+                <div class="footer-logo">
+                    <img src="/img/logo.png" alt="Logo Boeing" id="footer-logo">
+                </div>
+                <div class="footer-links">
+                   <a href="/html/privacy-policy.html" class="active">Privacy Policy</a>
+                   <a href="/html/terms-conditions.html">Termini and Condizioni</a>
+                </div>
+           </div>
+           <p class="copyright" data-aos="fade-up" data-aos-delay="200">&copy; <span id="anno"></span> Boeing. All rights reserved. Developed by Grillo Gaetano</p>
+       </div>
+   </footer>
+
+   <!-- Script AOS -->
+   <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+   <script src="/js/script.js"></script>
+
+   <!--Script per l'avanzamento automatico dell'anno-->
+   <script>
+        document.getElementById('anno').textContent = new Date().getFullYear();
+   </script>
+
+   <script>
+       document.addEventListener('DOMContentLoaded', function() {
+           // Inizializza AOS
+           AOS.init({
+               duration: 800,
+               easing: 'ease',
+               once: true,
+               offset: 100
+           });
+       });
+   </script>
+</body>
+
+</html>
+
