@@ -466,17 +466,17 @@ document.addEventListener("DOMContentLoaded", () => {
       // In un ambiente reale, questa sarebbe una richiesta al server
       // Per simulare, si controlli che il file sia nella lista di file disponibili
       const availableFiles = [
-        "./reports/Boeing_Sustainability_Report_2021.pdf",
-        "./reports/Boeing_Sustainability_Report_2020.pdf",
-        "./reports/Boeing_Sustainability_Report_2019.pdf",
-        "./reports/Boeing_Sustainability_Report_2018.pdf",
+        "/reports/Boeing_Sustainability_Report_2022.pdf",
+        "/reports/Boeing_Sustainability_Report_2021.pdf",
+        "/reports/Boeing_Sustainability_Report_2020.pdf",
+        "/reports/Boeing_Sustainability_Report_2019.pdf",
       ]
 
       // Aggiunta dei file protetti solo se l'utente è autenticato
       if (isAuthenticated) {
         availableFiles.push(
-          "./reports/Boeing_Sustainability_Report_2023.pdf",
-          "./reports/Boeing_Sustainability_Report_2022.pdf",
+          "/reports/Boeing_Sustainability_Report_2024.pdf",
+          "/reports/Boeing_Sustainability_Report_2023.pdf",
         )
       }
 
